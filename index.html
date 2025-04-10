@@ -1,16 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./JS/app.js"></script>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Gestor de Gastos</title>
+  <link rel="stylesheet" href="/CSS/style.css">
 </head>
+
 <body>
-    <header>
-        <h1>Gestor de gastos</h1>
-    </header>
-    <main></main>
-    <footer></footer>
+  <h1>Gestión de Ingresos y Gastos</h1>
+
+  <form id="formulario">
+    <input type="text" id="nombre" placeholder="Nombre" required>
+    <input type="number" id="monto" placeholder="Monto" required>
+    <input type="date" id="fecha" required>
+    <select id="tipo" required>
+      <option value="ingreso">Ingreso</option>
+      <option value="gasto">Gasto</option>
+    </select>
+    <button type="submit">Agregar</button>
+  </form>
+
+  <h2>Movimientos</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Nombre</th>
+        <th>Monto</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-movimientos">
+      <!-- Se carga con JS -->
+    </tbody>
+  </table>
+
+  <h2>Totales</h2>
+  <p><strong>Total de ingresos:</strong> $<span id="total-ingresos">0</span></p>
+  <p><strong>Total de gastos:</strong> $<span id="total-gastos">0</span></p>
+  <p><strong>Saldo disponible:</strong> $<span id="saldo">0</span></p>
+
+  <button id="borrar-datos">Borrar todos los datos</button>
+  <script src="/JS/main.js"></script>
 </body>
+
 </html>
