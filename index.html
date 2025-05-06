@@ -1,48 +1,129 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <title>Gestor de Gastos</title>
-  <link rel="stylesheet" href="/CSS/style.css">
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="img/site.webmanifest">
+
 </head>
-
 <body>
-  <h1>Gestión de Ingresos y Gastos</h1>
+  <header>
+    <h1>Gestor de Gastos</h1>
+    <a href="#">
+      <img width="32" height="32" src="https://img.icons8.com/windows/32/user-male-circle.png" alt="user-male-circle" />
+    </a>
+  </header>
 
-  <form id="formulario">
-    <input type="text" id="nombre" placeholder="Nombre" required>
-    <input type="number" id="monto" placeholder="Monto" required>
-    <input type="date" id="fecha" required>
-    <select id="tipo" required>
-      <option value="ingreso">Ingreso</option>
-      <option value="gasto">Gasto</option>
-    </select>
-    <button type="submit">Agregar</button>
-  </form>
+  <main>
+    <div class="sidebar">
+      <h2>Menú</h2>
+      <ul>
+        <li><a href="#" data-section="inicio">Inicio</a></li>
+        <li><a href="#" data-section="graficos">Gráficos</a></li>
+        <li><a href="#" data-section="cuentas">Cuentas a pagar</a></li>
+        <li><a href="#" data-section="ahorros">Ahorros</a></li>
+        <li><a href="#" data-section="ingresos">Ingresos</a></li>
+        <li><a href="#" data-section="gastos">Gastos</a></li>
+      </ul>
+    </div>
 
-  <h2>Movimientos</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Tipo</th>
-        <th>Nombre</th>
-        <th>Monto</th>
-        <th>Fecha</th>
-      </tr>
-    </thead>
-    <tbody id="tabla-movimientos">
-      <!-- Se carga con JS -->
-    </tbody>
-  </table>
+    <div class="main-content">
+      <!-- Sección: Inicio -->
+      <section id="inicio" class="seccion visible">
+        <h1>Gestión de Ingresos y Gastos</h1>
+        <form id="formulario">
+          <input type="text" id="nombre" placeholder="Nombre" required>
+          <input type="number" id="monto" placeholder="Monto" required>
+          <input type="date" id="fecha" required>
+          <select id="tipo" required>
+            <option value="ingreso">Ingreso</option>
+            <option value="gasto-dia">Gasto del día</option>
+            <option value="factura">Factura a pagar</option>
+          </select>
+          <input type="date" id="fecha-vencimiento" placeholder="Fecha de vencimiento">
+          <button type="submit">Agregar</button>
+        </form>
 
-  <h2>Totales</h2>
-  <p><strong>Total de ingresos:</strong> $<span id="total-ingresos">0</span></p>
-  <p><strong>Total de gastos:</strong> $<span id="total-gastos">0</span></p>
-  <p><strong>Saldo disponible:</strong> $<span id="saldo">0</span></p>
+        <h2>Movimientos</h2>
+        <table>
+          <thead>
+            <tr><th>Tipo</th><th>Nombre</th><th>Monto</th><th>Fecha</th></tr>
+          </thead>
+          <tbody id="tabla-movimientos"></tbody>
+        </table>
 
-  <button id="borrar-datos">Borrar todos los datos</button>
-  <script src="/JS/main.js"></script>
+        <h2>Totales</h2>
+        <p><strong>Total de ingresos:</strong> $<span id="total-ingresos">0</span></p>
+        <p><strong>Total de gastos:</strong> $<span id="total-gastos">0</span></p>
+        <p><strong>Saldo disponible:</strong> $<span id="saldo">0</span></p>
+
+        <button class="borrar-datos" id="borrar-datos">Borrar todos los datos</button>
+      </section>
+
+      <!-- Sección: Gráficos -->
+      <section id="graficos" class="seccion hidden">
+        <h2>Gráfico de Ingresos y Gastos</h2>
+        <canvas id="grafico-ingresos" width="500" height="250"></canvas>
+        <canvas id="grafico-gastos" width="500" height="250"></canvas>
+        <h3>Distribución de Gastos</h3>
+        <canvas id="grafico-categorias-gastos" width="500" height="250"></canvas>
+      </section>
+
+      <!-- Sección: Cuentas a pagar -->
+      <section id="cuentas" class="seccion hidden">
+        <h2>Facturas a pagar</h2>
+        <table>
+          <thead>
+            <tr><th>Nombre</th><th>Monto</th><th>Fecha</th><th>Vencimiento</th></tr>
+          </thead>
+          <tbody id="tabla-facturas"></tbody>
+        </table>
+      </section>
+
+      <!-- Sección: Ahorros -->
+      <section id="ahorros" class="seccion hidden">
+        <h2>Ahorros</h2>
+        <label>Porcentaje de ahorro sobre ingresos:</label>
+        <input type="number" id="porcentaje-ahorro" min="0" max="100">
+        <button onclick="calcularAhorro()">Calcular</button>
+        <p><strong>Total Ahorrado:</strong> $<span id="total-ahorro">0</span></p>
+      </section>
+
+      <!-- Sección: Ingresos -->
+      <section id="ingresos" class="seccion hidden">
+        <h2>Listado de Ingresos</h2>
+        <table>
+          <thead><tr><th>Nombre</th><th>Monto</th><th>Fecha</th></tr></thead>
+          <tbody id="tabla-ingresos"></tbody>
+        </table>
+      </section>
+
+      <!-- Sección: Gastos -->
+      <section id="gastos" class="seccion hidden">
+        <h2>Listado de Gastos</h2>
+        <table>
+          <thead><tr><th>Nombre</th><th>Monto</th><th>Fecha</th></tr></thead>
+          <tbody id="tabla-gastos"></tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Gestor de Gastos. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="JS/transacciones.js"></script>
+  <script src="JS/graficos.js"></script>
+  <script src="JS/cuentas.js"></script>
+  <script src="JS/ahorros.js"></script>
+  <script src="JS/main.js"></script>
 </body>
-
 </html>
