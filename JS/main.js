@@ -121,6 +121,7 @@ function mostrarFacturas() {
       fila.innerHTML = `
         <td>${fac.nombre}</td>
         <td>$${fac.monto}</td>
+        <td>${fac.fecha}</td>
         <td>${fac.vencimiento}</td>
       `;
       tbody.appendChild(fila);
