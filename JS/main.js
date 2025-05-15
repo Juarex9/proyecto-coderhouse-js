@@ -6,15 +6,21 @@ navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     const target = link.getAttribute('data-section');
-
     // Mostrar solo la sección correspondiente
     secciones.forEach(sec => {
       sec.classList.remove('visible');
       sec.classList.add('hidden');
     });
-
     document.getElementById(target).classList.remove('hidden');
     document.getElementById(target).classList.add('visible');
+    if (target === 'cuentas') mostrarFacturas();
+    if (target === 'ingresos' || target === 'gastos') mostrarListasSeparadas();
+    if (target === 'graficos') {
+      generarGraficos();
+      generarGraficoDeCategorias();
+    }
+
+
 
     // Estilo activo en el menú
     navLinks.forEach(l => l.parentElement.classList.remove('active'));
@@ -211,10 +217,10 @@ function generarGraficos() {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-        position: 'top'
+          position: 'top'
+        }
       }
     }
-  }
   });
 
   // Crear gráfico de gastos
