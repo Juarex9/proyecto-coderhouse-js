@@ -59,25 +59,7 @@ function agregarMovimiento(tipo, nombre, monto, fecha) {
   tablaMovimientos.appendChild(fila);
 }
 
-// Envío del formulario
-formulario.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const tipo = document.getElementById('tipo').value;
-  const nombre = document.getElementById('nombre').value;
-  const monto = parseFloat(document.getElementById('monto').value);
-  const fecha = document.getElementById('fecha').value;
-  const vencimiento = document.getElementById('fecha-vencimiento').value;
-
-  agregarMovimiento(tipo, nombre, monto, fecha);
-
-  const movimientos = recuperarLocalStorage();
-  movimientos.push({ tipo, nombre, monto, fecha, vencimiento });
-  guardarLocalStorage(movimientos);
-
-  calcularTotales();
-  formulario.reset();
-});
-
+// Guardar y recuperar movimientos en LocalStorage
 function guardarLocalStorage(movs) {
   localStorage.setItem('movimientos', JSON.stringify(movs));
 }
