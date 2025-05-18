@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Gestor de Gastos</title>
@@ -12,6 +13,7 @@
   <link rel="manifest" href="img/site.webmanifest">
 
 </head>
+
 <body>
   <header>
     <h1>Gestor de Gastos</h1>
@@ -38,9 +40,12 @@
       <section id="inicio" class="seccion visible">
         <h1>Gestión de Ingresos y Gastos</h1>
         <form id="formulario">
-          <input type="text" id="nombre" placeholder="Nombre" required>
+          <input type="text" id="nombre" placeholder="Nombre" required inputmode="text">
+          <span id="error-nombre" class="error-label hidden">⚠️ Ingresá un nombre válido.</span>
           <input type="number" id="monto" placeholder="Monto" required>
+          <span id="error-monto" class="error-label hidden">⚠️ Ingresá un monto válido mayor a 0.</span>
           <input type="date" id="fecha" required>
+          <span id="error-fecha" class="error-label hidden">⚠️ Seleccioná una fecha válida.</span>
           <select id="tipo" required>
             <option value="ingreso">Ingreso</option>
             <option value="gasto-dia">Gasto del día</option>
@@ -53,7 +58,12 @@
         <h2>Movimientos</h2>
         <table>
           <thead>
-            <tr><th>Tipo</th><th>Nombre</th><th>Monto</th><th>Fecha</th></tr>
+            <tr>
+              <th>Tipo</th>
+              <th>Nombre</th>
+              <th>Monto</th>
+              <th>Fecha</th>
+            </tr>
           </thead>
           <tbody id="tabla-movimientos"></tbody>
         </table>
@@ -80,7 +90,12 @@
         <h2>Facturas a pagar</h2>
         <table>
           <thead>
-            <tr><th>Nombre</th><th>Monto</th><th>Fecha</th><th>Vencimiento</th></tr>
+            <tr>
+              <th>Nombre</th>
+              <th>Monto</th>
+              <th>Fecha</th>
+              <th>Vencimiento</th>
+            </tr>
           </thead>
           <tbody id="tabla-facturas"></tbody>
         </table>
@@ -99,7 +114,13 @@
       <section id="ingresos" class="seccion hidden">
         <h2>Listado de Ingresos</h2>
         <table>
-          <thead><tr><th>Nombre</th><th>Monto</th><th>Fecha</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Monto</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
           <tbody id="tabla-ingresos"></tbody>
         </table>
       </section>
@@ -108,7 +129,13 @@
       <section id="gastos" class="seccion hidden">
         <h2>Listado de Gastos</h2>
         <table>
-          <thead><tr><th>Nombre</th><th>Monto</th><th>Fecha</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Monto</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
           <tbody id="tabla-gastos"></tbody>
         </table>
       </section>
@@ -120,10 +147,12 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="JS/transacciones.js"></script>
   <script src="JS/graficos.js"></script>
   <script src="JS/cuentas.js"></script>
   <script src="JS/ahorros.js"></script>
   <script src="JS/main.js"></script>
 </body>
+
 </html>

@@ -72,6 +72,22 @@ main {
   color: rgb(0, 0, 0);
 }
 
+.error-label {
+  color: red;
+  font-size: 0.9em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.input-error {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+.hidden {
+  display: none;
+}
+
 .hero-section {
   padding: 10px;
 }
@@ -128,7 +144,6 @@ table {
   font-size: 15px;
 }
 
-/* Cabeceras de tabla */
 thead th {
   background-color: #f4f4f4;
   font-weight: bold;
@@ -137,7 +152,6 @@ thead th {
   border-bottom: 2px solid #ddd;
 }
 
-/* Celdas del cuerpo de tabla */
 tbody td {
   padding: 10px 15px;
   border-bottom: 1px solid #eee;
@@ -165,19 +179,31 @@ tbody tr:nth-child(even) {
 }
 
 /* Espaciado entre títulos */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin-top: 25px;
   margin-bottom: 15px;
 }
-input{
+
+input {
   margin-top: 5px;
   width: 30%;
   height: 30px;
 }
-button{
+
+button {
   margin-top: 5px;
   margin-bottom: 10px;
-  cursor: pointer;;
+  cursor: pointer;
+  ;
   width: 100px;
   height: 30px;
+}
+
+.espaciado-botones {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  gap: 10px !important;
 }
